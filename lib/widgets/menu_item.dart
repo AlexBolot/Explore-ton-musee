@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 
 class MenuItem extends StatefulWidget {
+  // ----- Static area ----- //
+
+  static Row group(List<Widget> children) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      children: children,
+    );
+  }
+
+  static Color get blue => Colors.lightBlue;
+
+  static Color get purple => Colors.deepPurpleAccent.withOpacity(0.8);
+
+  static Color get green => Colors.green;
+
+  static Color get orange => Colors.orange;
+
+  static Color get turquoise => Colors.teal;
+
+  // ------ non-static ----- //
+
   final double width;
   final double height;
   final IconData icon;
@@ -9,6 +31,9 @@ class MenuItem extends StatefulWidget {
   final Function onPressed;
   final Color color;
   final double ratio;
+  final TextAlign titleAlign;
+  final TextAlign contentAlign;
+  final bool contentFormatted;
 
   MenuItem({
     this.icon,
@@ -17,8 +42,11 @@ class MenuItem extends StatefulWidget {
     this.color,
     this.width,
     this.height = 150,
+    this.titleAlign = TextAlign.center,
+    this.contentAlign = TextAlign.center,
     this.title = 'Default Title',
     this.content = 'Default Content',
+    this.contentFormatted = false,
   });
 
   @override
@@ -37,11 +65,12 @@ class _MenuItemState extends State<MenuItem> {
 
     this.height = widget.height;
     this.width = widget.width;
+    this.content = widget.content;
 
     this.width ??= this.height * this.ratio;
     this.height ??= this.width / this.ratio;
 
-    this.content = reformat(widget.content, 25);
+    if (widget.contentFormatted == false) this.content = reformat(widget.content, 25);
 
     return Container(
       height: this.height,
@@ -73,11 +102,22 @@ class _MenuItemState extends State<MenuItem> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(widget.title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(
+                widget.title,
+                softWrap: true,
+                textAlign: widget.titleAlign,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               Container(height: 8),
-              Text(this.content, softWrap: true, maxLines: 3, textAlign: TextAlign.center),
+              Text(
+                this.content,
+                softWrap: true,
+                maxLines: 3,
+                textAlign: widget.contentAlign,
+              ),
             ],
           ),
         ),
@@ -99,10 +139,23 @@ class _MenuItemState extends State<MenuItem> {
           Container(width: 8.0),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                autoFitting(Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold))),
-                autoFitting(Text(this.content, softWrap: true, maxLines: 3, textAlign: TextAlign.center)),
+                Text(
+                  widget.title,
+                  softWrap: true,
+                  textAlign: widget.titleAlign,
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+                Container(height: 8),
+                Text(
+                  this.content,
+                  softWrap: true,
+                  textAlign: widget.contentAlign,
+                  style: TextStyle(fontSize: 16),
+                ),
               ],
             ),
           ),
@@ -111,12 +164,16 @@ class _MenuItemState extends State<MenuItem> {
     );
   }
 
-  Widget autoFitting(Widget child) => ListTile(dense: true, title: FittedBox(child: child));
-
   String reformat(String source, int maxLineLength) {
     if (source.length <= maxLineLength) return source;
 
     var spaceIndex = source.lastIndexOf(' ', maxLineLength);
-    return (spaceIndex != -1) ? source.replaceFirst(' ', '\n', spaceIndex) : source;
+
+    if (spaceIndex == -1) return source;
+
+    String firstLine = source.substring(0, spaceIndex);
+    String rest = source.substring(spaceIndex + 1);
+
+    return firstLine + '\n' + reformat(rest, maxLineLength);
   }
 }

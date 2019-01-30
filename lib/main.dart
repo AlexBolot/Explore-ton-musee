@@ -1,4 +1,5 @@
 import 'package:explore_ton_musee/pages/visitor/about_us.dart';
+import 'package:explore_ton_musee/pages/visitor/explore.dart';
 import 'package:explore_ton_musee/pages/visitor/home_page.dart';
 import 'package:explore_ton_musee/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => SplashScreen(),
-        HomePage.routeName: (context) => HomePage(),
-        AboutUs.routeName: (context) => AboutUs(title: 'Home Page of the App'),
         SplashScreen.routeName: (context) => SplashScreen(),
+        HomePage.routeName: (context) => HomePage(),
+        AboutUs.routeName: (context) => AboutUs(),
+        Explore.routeName: (context) => Explore(),
       },
     );
   }
@@ -29,3 +31,5 @@ Color textColorMatching(Color background) {
   var brightness = ThemeData.estimateBrightnessForColor(background);
   return brightness == Brightness.light ? Colors.black : Colors.white;
 }
+
+double percentSize(double percent, double of) => percent * of / 100;
