@@ -22,9 +22,8 @@ class _AboutUsState extends State<AboutUs> {
       appBar: AppBar(title: Text(widget.title)),
       body: Container(
         child: MenuItem.listView([
-          MenuItem(
+          MenuItem.horizontal(
             height: 200,
-            ratio: 2.0,
             color: MenuItem.blue,
             icon: Icons.book,
             contentAlign: TextAlign.justify,
@@ -33,9 +32,8 @@ class _AboutUsState extends State<AboutUs> {
             content: 'Son but était de proposer rassembler des collections pour les faire partager à tous',
           ),
           horizontalSeparator,
-          MenuItem(
+          MenuItem.horizontal(
             height: 150,
-            ratio: 2.0,
             color: MenuItem.orange,
             icon: Icons.explore,
             contentAlign: TextAlign.justify,

@@ -1,4 +1,3 @@
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:explore_ton_musee/main.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
@@ -27,16 +26,15 @@ class _ExploreState extends State<Explore> {
       body: Container(
         child: MenuItem.listView([
           MenuItem.row([
-            MenuItem(
+            MenuItem.vertical(
               height: 180,
               width: percentSize(50, availableWidth),
               icon: Icons.nfc,
               color: MenuItem.purple,
               title: 'Chasse au Trésor',
               content: 'Parcours à indices',
-              onPressed: scan,
             ),
-            MenuItem(
+            MenuItem.vertical(
               height: 180,
               width: percentSize(50, availableWidth),
               icon: Icons.extension,
@@ -47,7 +45,7 @@ class _ExploreState extends State<Explore> {
           ]),
           horizontalSeparator,
           MenuItem.row([
-            MenuItem(
+            MenuItem.vertical(
               height: 180,
               width: percentSize(50, availableWidth),
               icon: Icons.timeline,
@@ -56,7 +54,7 @@ class _ExploreState extends State<Explore> {
               content: 'Choisir un parcours recommandé',
             ),
             horizontalSeparator,
-            MenuItem(
+            MenuItem.vertical(
               height: 180,
               width: percentSize(50, availableWidth),
               icon: Icons.fingerprint,
@@ -65,13 +63,16 @@ class _ExploreState extends State<Explore> {
               content: 'Résoudre une énigme',
             ),
           ]),
+          horizontalSeparator,
+          MenuItem.horizontal(
+            width: double.infinity,
+            height: 100,
+            icon: Icons.star,
+            color: MenuItem.yellow,
+            title: 'Donnez-nous votre avis',
+          ),
         ]),
       ),
     );
-  }
-
-  Future scan() async {
-    String barcode = await BarcodeScanner.scan();
-    setState(() {});
   }
 }

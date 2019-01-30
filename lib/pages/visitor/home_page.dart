@@ -26,9 +26,8 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         child: MenuItem.listView([
           //----------------//
-          MenuItem(
+          MenuItem.horizontal(
             color: MenuItem.green,
-            ratio: 2.0,
             icon: Icons.account_balance,
             title: 'À propos de nous',
             content: 'Informations importantes sur le musée',
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           horizontalSeparator,
           //----------------//
           MenuItem.row([
-            MenuItem(
+            MenuItem.vertical(
               width: percentSize(40, availableWidth),
               color: MenuItem.blue,
               icon: Icons.explore,
@@ -45,7 +44,7 @@ class _HomePageState extends State<HomePage> {
               content: 'Visiter en autonomie',
               onPressed: () => Navigator.of(context).pushNamed(Explore.routeName),
             ),
-            MenuItem(
+            MenuItem.vertical(
               width: percentSize(60, availableWidth),
               color: MenuItem.orange,
               icon: Icons.group_add,
@@ -55,8 +54,7 @@ class _HomePageState extends State<HomePage> {
           ]),
           horizontalSeparator,
           //----------------//
-          MenuItem(
-            ratio: 2.0,
+          MenuItem.horizontal(
             color: MenuItem.purple,
             icon: Icons.assistant,
             title: 'Exposition Temporaire',
@@ -65,14 +63,14 @@ class _HomePageState extends State<HomePage> {
           horizontalSeparator,
           //----------------//
           MenuItem.row([
-            MenuItem(
+            MenuItem.vertical(
               width: percentSize(50, availableWidth),
               color: MenuItem.turquoise,
               icon: Icons.help,
               title: 'Aide',
               content: "Renseignements sur l'application",
             ),
-            MenuItem(
+            MenuItem.vertical(
               width: percentSize(50, availableWidth),
               color: MenuItem.blue,
               icon: Icons.place,
