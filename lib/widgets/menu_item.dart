@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 class MenuItem extends StatefulWidget {
   // ----- Static area ----- //
 
-  static Row group(List<Widget> children) {
+  static ListView listView(List<Widget> children){
+    return ListView(
+      padding: EdgeInsets.all(16),
+      children: children,
+    );
+  }
+  
+  static Row row(List<Widget> children) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.max,
@@ -42,10 +49,10 @@ class MenuItem extends StatefulWidget {
     this.color,
     this.width,
     this.height = 150,
-    this.titleAlign = TextAlign.center,
-    this.contentAlign = TextAlign.center,
-    this.title = 'Default Title',
-    this.content = 'Default Content',
+    this.titleAlign,
+    this.contentAlign,
+    this.title,
+    this.content,
     this.contentFormatted = false,
   });
 
@@ -58,6 +65,7 @@ class _MenuItemState extends State<MenuItem> {
   double height;
   double ratio;
   String content;
+  String title;
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +73,14 @@ class _MenuItemState extends State<MenuItem> {
 
     this.height = widget.height;
     this.width = widget.width;
-    this.content = widget.content;
+    this.content = widget.content ?? '';
+    this.title = widget.title ?? '';
 
     this.width ??= this.height * this.ratio;
     this.height ??= this.width / this.ratio;
 
     if (widget.contentFormatted == false) this.content = reformat(widget.content, 25);
+    if (widget.contentFormatted == false) this.title = reformat(widget.title, 20);
 
     return Container(
       height: this.height,
@@ -106,9 +116,9 @@ class _MenuItemState extends State<MenuItem> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                widget.title,
+                this.title,
                 softWrap: true,
-                textAlign: widget.titleAlign,
+                textAlign: widget.titleAlign ?? TextAlign.center,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Container(height: 8),
@@ -116,7 +126,7 @@ class _MenuItemState extends State<MenuItem> {
                 this.content,
                 softWrap: true,
                 maxLines: 3,
-                textAlign: widget.contentAlign,
+                textAlign: widget.contentAlign ?? TextAlign.center,
               ),
             ],
           ),
@@ -126,41 +136,39 @@ class _MenuItemState extends State<MenuItem> {
   }
 
   Widget horizontalItem() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Icon(
             widget.icon,
             size: 64,
             color: widget.color,
           ),
-          Container(width: 8.0),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  widget.title,
-                  softWrap: true,
-                  textAlign: widget.titleAlign,
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                Container(height: 8),
-                Text(
-                  this.content,
-                  softWrap: true,
-                  textAlign: widget.contentAlign,
-                  style: TextStyle(fontSize: 16),
-                ),
-              ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              this.title,
+              softWrap: true,
+              textAlign: widget.titleAlign ?? TextAlign.justify,
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-          ),
-        ],
-      ),
+            Container(height: 8),
+            Text(
+              this.content,
+              softWrap: true,
+              textAlign: widget.contentAlign ?? TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ],
     );
   }
 

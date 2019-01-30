@@ -1,5 +1,5 @@
 import 'package:explore_ton_musee/pages/visitor/about_us.dart';
-import 'package:explore_ton_musee/pages/visitor/explore.dart';
+import 'package:explore_ton_musee/pages/visitor/explore/explore.dart';
 import 'package:explore_ton_musee/pages/visitor/home_page.dart';
 import 'package:explore_ton_musee/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +23,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-double screenWidth;
-double screenHeight;
 
 Color textColorMatching(Color background) {
   var brightness = ThemeData.estimateBrightnessForColor(background);
