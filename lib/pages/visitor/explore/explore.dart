@@ -1,4 +1,5 @@
 import 'package:explore_ton_musee/main.dart';
+import 'package:explore_ton_musee/pages/visitor/explore/nfc_game.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,7 @@ class _ExploreState extends State<Explore> {
               color: MenuItem.purple,
               title: 'Chasse au Trésor',
               content: 'Parcours à indices',
+              onPressed: ()=> Navigator.of(context).pushNamed(NFCGame.routeName),
             ),
             MenuItem.vertical(
               height: 180,

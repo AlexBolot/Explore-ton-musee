@@ -1,5 +1,6 @@
 import 'package:explore_ton_musee/pages/visitor/about_us.dart';
 import 'package:explore_ton_musee/pages/visitor/explore/explore.dart';
+import 'package:explore_ton_musee/pages/visitor/explore/nfc_game.dart';
 import 'package:explore_ton_musee/pages/visitor/home_page.dart';
 import 'package:explore_ton_musee/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (context) => HomePage(),
         AboutUs.routeName: (context) => AboutUs(),
         Explore.routeName: (context) => Explore(),
+        NFCGame.routeName: (context) => NFCGame(),
       },
     );
   }
