@@ -1,5 +1,5 @@
 import 'package:explore_ton_musee/main.dart';
-import 'package:explore_ton_musee/pages/visitor/home_page.dart';
+import 'package:explore_ton_musee/views/visitor/home_page.dart';
 import 'package:explore_ton_musee/widgets/bubble_loader.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       'Explore ton musée !',
                       style: TextStyle(
                         fontSize: 30,
-                        color: textColorMatching(Theme.of(context).primaryColor),
+                        color: contrastOf(Theme.of(context).primaryColor),
                         fontWeight: FontWeight.bold,
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:explore_ton_musee/main.dart';
-import 'package:explore_ton_musee/pages/visitor/explore/nfc_game.dart';
+import 'package:explore_ton_musee/views/visitor/explore/nfc_game.dart';
+import 'package:explore_ton_musee/views/visitor/explore/search_game.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 
@@ -34,15 +35,16 @@ class _ExploreState extends State<Explore> {
               color: MenuItem.purple,
               title: 'Chasse au Trésor',
               content: 'Parcours à indices',
-              onPressed: ()=> Navigator.of(context).pushNamed(NFCGame.routeName),
+              onPressed: () => Navigator.of(context).pushNamed(NFCGame.routeName),
             ),
             MenuItem.vertical(
               height: 180,
               width: percentSize(50, availableWidth),
-              icon: Icons.extension,
+              icon: Icons.search,
               color: MenuItem.turquoise,
-              title: 'Jeu de Puzzle',
+              title: 'Jeu de Recherche',
               content: "Retrouver un objet à partir d'un extrait",
+              onPressed: () => Navigator.of(context).pushNamed(SearchGame.routeName),
             ),
           ]),
           horizontalSeparator,

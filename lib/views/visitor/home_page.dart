@@ -1,6 +1,6 @@
 import 'package:explore_ton_musee/main.dart';
-import 'package:explore_ton_musee/pages/visitor/about_us.dart';
-import 'package:explore_ton_musee/pages/visitor/explore/explore.dart';
+import 'package:explore_ton_musee/views/visitor/about_us.dart';
+import 'package:explore_ton_musee/views/visitor/explore/explore.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 
