@@ -1,6 +1,6 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:explore_ton_musee/main.dart';
-import 'package:explore_ton_musee/model/SearchGameItem.dart';
+import 'package:explore_ton_musee/model/search_hint.dart';
 import 'package:explore_ton_musee/services/search_game_service.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search_finished.dart';
 import 'package:flutter/material.dart';
@@ -171,6 +171,7 @@ class _SearchGameState extends State<SearchGame> {
   @override
   void dispose() {
     SystemChrome.setPreferredOrientations([]);
+    timer?.cancel();
     super.dispose();
   }
 }

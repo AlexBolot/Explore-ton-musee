@@ -176,7 +176,7 @@ class _MenuItemState extends State<MenuItem> {
       child: Text(
         widget.title,
         softWrap: true,
-        textAlign: titleAlign,
+        textAlign: widget.titleAlign ?? titleAlign,
         style: TextStyle(fontSize: widget.titleSize, fontWeight: FontWeight.bold),
       ),
     ));

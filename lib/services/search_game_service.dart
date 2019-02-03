@@ -1,4 +1,4 @@
-import 'package:explore_ton_musee/model/SearchGameItem.dart';
+import 'package:explore_ton_musee/model/search_hint.dart';
 
 class SearchGameService {
   static int _index = 0;

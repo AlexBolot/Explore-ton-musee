@@ -18,7 +18,7 @@ class SearchHint {
 
   @override
   String toString() {
-    return 'SearchGameItem{imagePath: ${imagePath}, imageCode: ${imageCode}}';
+    return 'SearchGameItem{imagePath: $imagePath, imageCode: $imageCode}';
   }
 
   @override

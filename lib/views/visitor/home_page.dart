@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
         child: MenuItem.listView([
           //----------------//
           MenuItem.horizontal(
+            height: 120,
             color: MenuItem.green,
             icon: Icons.account_balance,
             title: 'À propos de nous',
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage> {
           horizontalSeparator,
           //----------------//
           MenuItem.horizontal(
+            height: 120,
             color: MenuItem.purple,
             icon: Icons.assistant,
             title: 'Exposition Temporaire',
@@ -80,6 +82,22 @@ class _HomePageState extends State<HomePage> {
           ]),
           horizontalSeparator,
           //----------------//
+          MenuItem.row([
+            MenuItem.vertical(
+              width: percentSize(50, availableWidth),
+              color: MenuItem.orange,
+              icon: Icons.shopping_basket,
+              title: 'La boutique',
+              content: 'Découvrez nos produits et souvenirs',
+            ),
+            MenuItem.vertical(
+              width: percentSize(50, availableWidth),
+              color: MenuItem.yellow,
+              icon: Icons.star,
+              title: 'Donnez votre avis',
+              content: "Que pensez vous de l'application ?",
+            ),
+          ]),
         ]),
       ),
     );
