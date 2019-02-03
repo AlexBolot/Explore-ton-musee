@@ -1,6 +1,8 @@
+import 'package:explore_ton_musee/main.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc_game.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NFCStarter extends StatefulWidget {
   static const String routeName = "/NFCStarter";
@@ -15,23 +17,28 @@ class NFCStarter extends StatefulWidget {
 
 class _NFCStarterState extends State<NFCStarter> {
   @override
-  Widget build(BuildContext context) {
-    var horizontalSeparator = Container(height: 8.0);
+  void initState() {
+    super.initState();
 
-    double height = 110;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var horizontalSeparator = Container(height: 4.0);
+
+    double elevation = 2;
+    double height = 100;
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.check),
-        tooltip: "C'est parti !",
-        onPressed: () {
-          Navigator.of(context).pushNamed(NFCGame.routeName);
-        },
-      ),
       body: Container(
         child: MenuItem.listView([
           MenuItem.horizontal(
+            elevation: elevation,
             height: height,
             color: MenuItem.purple,
             icon: Icons.nfc,
@@ -41,6 +48,7 @@ class _NFCStarterState extends State<NFCStarter> {
           ),
           horizontalSeparator,
           MenuItem.horizontal(
+            elevation: elevation,
             height: height,
             color: MenuItem.orange,
             icon: Icons.assignment,
@@ -50,6 +58,7 @@ class _NFCStarterState extends State<NFCStarter> {
           ),
           horizontalSeparator,
           MenuItem.horizontal(
+            elevation: elevation,
             height: height,
             color: MenuItem.turquoise,
             icon: Icons.tap_and_play,
@@ -59,6 +68,7 @@ class _NFCStarterState extends State<NFCStarter> {
           ),
           horizontalSeparator,
           MenuItem.horizontal(
+            elevation: elevation,
             height: height,
             color: MenuItem.blue,
             icon: Icons.timeline,
@@ -66,8 +76,31 @@ class _NFCStarterState extends State<NFCStarter> {
             content: "Cherchez d'autres indices jusqu'au trésor",
             contentAlign: TextAlign.start,
           ),
+          horizontalSeparator,
+          Container(
+            height: 50,
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 100),
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              color: Theme.of(context).primaryColor,
+              textColor: contrastOf(Theme.of(context).primaryColor),
+              child: Text(
+                "C'est parti !",
+                style: TextStyle(fontSize: 16),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(NFCGame.routeName);
+              },
+            ),
+          )
         ]),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([]);
+    super.dispose();
   }
 }

@@ -35,6 +35,7 @@ class MenuItem extends StatefulWidget {
   final Color color;
   final IconData icon;
 
+  final double elevation;
   final double height;
   final double width;
 
@@ -53,6 +54,7 @@ class MenuItem extends StatefulWidget {
   final bool _isVertical;
 
   MenuItem.vertical({
+    this.elevation,
     this.color,
     this.icon,
     this.title = '',
@@ -69,6 +71,7 @@ class MenuItem extends StatefulWidget {
         _isVertical = true;
 
   MenuItem.horizontal({
+    this.elevation,
     this.color,
     this.icon,
     this.title = '',
@@ -153,16 +156,22 @@ class _MenuItemState extends State<MenuItem> {
   }
 
   Widget _wrapInCard(Widget child) {
+    var hasInteraction = widget.onPressed != null;
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
-      elevation: 16,
-      child: InkWell(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-        highlightColor: Theme.of(context).primaryColor.withOpacity(0.1),
-        splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
-        onTap: widget.onPressed ?? () => print('Callback not given'),
-        child: child,
-      ),
+      elevation: widget.elevation ?? 16,
+      child: hasInteraction ? _wrapInInkWell(child) : child,
+    );
+  }
+
+  Widget _wrapInInkWell(Widget child) {
+    return InkWell(
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+      highlightColor: Theme.of(context).primaryColor.withOpacity(0.1),
+      splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
+      onTap: widget.onPressed ?? () => print('Callback not given'),
+      child: child,
     );
   }
 

@@ -92,15 +92,12 @@ class _NFCGameState extends State<NFCGame> {
         print('expected : ${nfcHint.nfcCode}');
         print('found : $foundCode');
       }
-    } else {
-      print('expected : ${nfcHint.nfcCode}');
-      print('found : ${data.content}');
+
+      await stopNFC();
+      await startNFC(callback: tagFound);
+
+      print('-ready to read-');
     }
-
-    await stopNFC();
-    await startNFC(callback: tagFound);
-
-    print('-ready to read-');
   }
 
   void addHintItem(String content) {
@@ -124,7 +121,6 @@ class _NFCGameState extends State<NFCGame> {
                 child: Container(
                   padding: EdgeInsets.only(right: 16),
                   child: Text(
-                    //'Je suis un objet de petite taille, utilisé par des joueurs de tennis, je tiens dans la main et je me déplace souvent très vite !',
                     '${nfcHint.hintText}',
                     softWrap: true,
                     overflow: TextOverflow.fade,
