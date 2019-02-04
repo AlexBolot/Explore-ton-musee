@@ -1,24 +1,24 @@
 class SearchHint {
   String imagePath;
-  String imageCode;
+  String code;
 
-  SearchHint({this.imagePath, this.imageCode});
+  SearchHint({this.imagePath, this.code});
 
   SearchHint.fromMap(Map data) {
     this.imagePath = data['imagePath'];
-    this.imageCode = data['imageCode'];
+    this.code = data['imageCode'];
   }
 
   Map toMap() {
     return {
       'imagePath': this.imagePath,
-      'imageCode': this.imageCode,
+      'imageCode': this.code,
     };
   }
 
   @override
   String toString() {
-    return 'SearchGameItem{imagePath: $imagePath, imageCode: $imageCode}';
+    return 'SearchGameItem{imagePath: $imagePath, imageCode: $code}';
   }
 
   @override
@@ -27,8 +27,8 @@ class SearchHint {
       other is SearchHint &&
           runtimeType == other.runtimeType &&
           imagePath == other.imagePath &&
-          imageCode == other.imageCode;
+          code == other.code;
 
   @override
-  int get hashCode => imagePath.hashCode ^ imageCode.hashCode;
+  int get hashCode => imagePath.hashCode ^ code.hashCode;
 }

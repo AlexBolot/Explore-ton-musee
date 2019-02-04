@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  mockito: ^4.0.0
   barcode_scan:
   flutter_nfc_reader:
     git:

@@ -58,37 +58,3 @@ void showSnackBar({@required ScaffoldState scaffoldState, String message, Durati
     ),
   );
 }
-
-Future<void> startNFC({void callback(NfcData data)}) async {
-  NfcData response;
-
-  try {
-    print('NFC : ready');
-    response = await FlutterNfcReader.read;
-    print('NFC : Tag found');
-  } on PlatformException {
-    print('NFC: Scan stopped exception');
-  }
-
-  if (callback != null) callback(response);
-}
-
-Future<void> stopNFC({bool restart = false, void callback(NfcData data)}) async {
-  NfcData response;
-
-  try {
-    response = await FlutterNfcReader.stop;
-    print('NFC : Stopped reading');
-  } on PlatformException {
-    print('NFC: Stop scan exception');
-    response = NfcData(
-      id: '',
-      content: '',
-      error: 'NFC scan stop exception',
-      statusMapper: '',
-    );
-    response.status = NFCStatus.error;
-  }
-
-  if (callback != null) callback(response);
-}

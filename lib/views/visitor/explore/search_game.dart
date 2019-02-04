@@ -1,7 +1,7 @@
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:explore_ton_musee/main.dart';
 import 'package:explore_ton_musee/model/search_hint.dart';
-import 'package:explore_ton_musee/services/search_game_service.dart';
+import 'package:explore_ton_musee/services/qr_game_service.dart';
+import 'package:explore_ton_musee/services/service_provider.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search_finished.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -20,8 +20,7 @@ class SearchGame extends StatefulWidget {
 }
 
 class _SearchGameState extends State<SearchGame> {
-
-  SearchGameService gameService = SearchGameService();
+  QRGameService gameService = ServiceProvider.qrGameService;
   SearchHint searchHint;
 
   bool success = false;
@@ -42,8 +41,8 @@ class _SearchGameState extends State<SearchGame> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    
-    generateNewGame();
+
+    renewHint();
   }
 
   @override
@@ -81,37 +80,45 @@ class _SearchGameState extends State<SearchGame> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Stack(
-                        alignment: Alignment(0, 0),
-                        children: <Widget>[
-                          FloatingActionButton(
-                            mini: true,
-                            backgroundColor: canRefresh ? Colors.amber[900] : Colors.grey,
-                            heroTag: null,
-                            onPressed: () {},
-                            child: Icon(Icons.autorenew),
-                          ),
-                          Container(
-                            height: 36,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.amber[900]),
-                              strokeWidth: 4,
-                              value: progress,
+                      GestureDetector(
+                        onTap: canRefresh ? renewHint : () => print('hey not so fast !'),
+                        child: Stack(
+                          alignment: Alignment(0, 0),
+                          children: <Widget>[
+                            FloatingActionButton(
+                              elevation: canRefresh ? 6 : 0,
+                              mini: true,
+                              backgroundColor: canRefresh ? Colors.amber[900] : Colors.grey,
+                              heroTag: 'renew',
+                              tooltip: 'renew',
+                              onPressed: canRefresh ? renewHint : () => print('hey not so fast !'),
+                              child: Icon(Icons.autorenew),
                             ),
-                          ),
-                        ],
+                            Container(
+                              height: 36,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.amber[900]),
+                                strokeWidth: 4,
+                                value: progress,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       FloatingActionButton(
-                        heroTag: null,
+                        heroTag: 'scan',
+                        tooltip: 'scan',
                         onPressed: scanCode,
                         child: Icon(Icons.photo_camera, size: 32),
                       ),
                       FloatingActionButton(
+                        elevation: success ? 6 : 0,
                         mini: true,
                         backgroundColor: success ? Colors.green[700] : Colors.grey,
-                        heroTag: null,
+                        heroTag: 'forward',
+                        tooltip: 'forward',
                         child: Icon(Icons.arrow_forward),
-                        onPressed: generateNewGame,
+                        onPressed: success ? renewHint : () => print('hey not so fast !'),
                       ),
                     ],
                   ),
@@ -125,9 +132,9 @@ class _SearchGameState extends State<SearchGame> {
   }
 
   scanCode() async {
-    String result = await BarcodeScanner.scan() ?? '';
+    String result = await ServiceProvider.qrGameService.scanCode();
 
-    bool isValid = result == searchHint.imageCode;
+    bool isValid = result == searchHint.code;
 
     if (!isValid) {
       showSnackBar(
@@ -139,7 +146,7 @@ class _SearchGameState extends State<SearchGame> {
     setState(() => success = isValid);
   }
 
-  generateNewGame() {
+  renewHint() {
     timer?.cancel();
     timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
       setState(() {
@@ -155,7 +162,7 @@ class _SearchGameState extends State<SearchGame> {
         }
       });
     });
-    
+
     if (gameService.hasNext) {
       setState(() {
         searchHint = gameService.next;
@@ -170,6 +177,7 @@ class _SearchGameState extends State<SearchGame> {
 
   @override
   void dispose() {
+    gameService.init(startAt: 0);
     SystemChrome.setPreferredOrientations([]);
     timer?.cancel();
     super.dispose();
