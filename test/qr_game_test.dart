@@ -8,112 +8,120 @@ import 'package:mockito/mockito.dart';
 
 import 'test_utils.dart';
 
-class QRGameServiceMock extends Mock implements QRGameService {}
+final String testGroupName = 'QR Game';
 
 main() {
-  QRGameServiceMock myService;
-  int index = 0;
-  List<SearchHint> hints = [
-    SearchHint(imagePath: 'path/to/asset1', code: '123'),
-    SearchHint(imagePath: 'path/to/asset2', code: '456'),
-  ];
+  group(testGroupName, () {
+    QRGameServiceMock myService;
+    int index = 0;
+    List<SearchHint> hints = [
+      SearchHint(imagePath: 'path/to/asset1', code: '123'),
+      SearchHint(imagePath: 'path/to/asset2', code: '456'),
+    ];
 
-  setUpAll(() {
-    myService = QRGameServiceMock();
+    setUpAll(() {
+      myService = QRGameServiceMock();
 
-    when(myService.scanCode()).thenAnswer((_) => Future.value(hints[index - 1].code));
-    when(myService.hasNext).thenReturn(index < hints.length);
-    when(myService.next).thenAnswer((_) => hints[index++]);
+      when(myService.scanCode()).thenAnswer((_) => Future.value(hints[index - 1].code));
+      when(myService.hasNext).thenReturn(index < hints.length);
+      when(myService.next).thenAnswer((_) => hints[index++]);
 
-    ServiceProvider.init(qrService: myService);
-  });
+      ServiceProvider.init(qrService: myService);
+    });
 
-  setUp(() => index = 0);
+    setUp(() => index = 0);
 
-  // ----------------------------------------------------------------------------------------- //
-  // ------------------------------ QR Game : Normal behaviour ------------------------------- //
-  // ----------------------------------------------------------------------------------------- //
+    // ----------------------------------------------------------------------------------------- //
+    // ------------------------------ QR Game : Normal behaviour ------------------------------- //
+    // ----------------------------------------------------------------------------------------- //
 
-  testWidgets('QR Game : Normal behaviour', (WidgetTester tester) async {
-    await tester.pumpWidget(testableOf(SearchGame()));
+    testWidgets('Normal behaviour', (WidgetTester tester) async {
+      await tester.pumpWidget(testableOf(SearchGame()));
 
-    // 1. Expected : There is a displayed image
-    // 2. Expected : It's the first of the hints list
-    // 3. Expected : The 'forward' button is grey
-    expect(find.byType(Image), findsOneWidget);
-    expect(getDisplayedImage(tester).image, equals(Image.asset(hints[0].imagePath).image));
-    expect(getFAB(tester, Icons.arrow_forward).backgroundColor, equals(Colors.grey));
+      // 1. Expected : There is a displayed image
+      // 2. Expected : It's the first of the hints list
+      // 3. Expected : The 'forward' button is grey
+      expect(find.byType(Image), findsOneWidget);
+      expect(getDisplayedImage(tester).image, equals(Image.asset(hints[0].imagePath).image));
+      expect(getFAB(tester, Icons.arrow_forward).backgroundColor, equals(Colors.grey));
 
-    // Trigger 'scan'
-    await tester.tap(find.byIcon(Icons.photo_camera));
-    await tester.pump();
+      // Trigger 'scan'
+      await tester.tap(find.byIcon(Icons.photo_camera));
+      await tester.pump();
 
-    // Expected : 'forward' button is green
-    expect(getFAB(tester, Icons.arrow_forward).backgroundColor, equals(Colors.green[700]));
+      // Expected : 'forward' button is green
+      expect(getFAB(tester, Icons.arrow_forward).backgroundColor, equals(Colors.green[700]));
 
-    // Trigger 'forward'
-    await tester.tap(find.byIcon(Icons.arrow_forward));
-    await tester.pump();
+      // Trigger 'forward'
+      await tester.tap(find.byIcon(Icons.arrow_forward));
+      await tester.pump();
 
-    // Expected : the displayed image changed, and is the second of the hints list
-    expect(getDisplayedImage(tester).image, equals(Image.asset(hints[1].imagePath).image));
-  });
+      // Expected : the displayed image changed, and is the second of the hints list
+      expect(getDisplayedImage(tester).image, equals(Image.asset(hints[1].imagePath).image));
 
-  // ----------------------------------------------------------------------------------------- //
-  // ----------------------------------- QR Game : No scan ----------------------------------- //
-  // ----------------------------------------------------------------------------------------- //
+      printSuccess(testGroupName, 'Normal behaviour');
+    });
 
-  testWidgets('QR Game : No scan', (WidgetTester tester) async {
-    await tester.pumpWidget(testableOf(SearchGame()));
+    // ----------------------------------------------------------------------------------------- //
+    // ----------------------------------- QR Game : No scan ----------------------------------- //
+    // ----------------------------------------------------------------------------------------- //
 
-    // 1. Expected : There is a displayed image
-    // 2. Expected : It's the first of the hints list
-    // 3. Expected : The 'forward' button is grey
-    expect(find.byType(Image), findsOneWidget);
-    expect(getDisplayedImage(tester).image, equals(Image.asset(hints[0].imagePath).image));
-    expect(getFAB(tester, Icons.arrow_forward).backgroundColor, equals(Colors.grey));
+    testWidgets('No scan', (WidgetTester tester) async {
+      await tester.pumpWidget(testableOf(SearchGame()));
 
-    // !! We don't trigger 'scan' !!
+      // 1. Expected : There is a displayed image
+      // 2. Expected : It's the first of the hints list
+      // 3. Expected : The 'forward' button is grey
+      expect(find.byType(Image), findsOneWidget);
+      expect(getDisplayedImage(tester).image, equals(Image.asset(hints[0].imagePath).image));
+      expect(getFAB(tester, Icons.arrow_forward).backgroundColor, equals(Colors.grey));
 
-    // Expected : 'forward' button is still grey
-    expect(getFAB(tester, Icons.arrow_forward).backgroundColor, equals(Colors.grey));
+      // !! We don't trigger 'scan' !!
 
-    // Trigger 'forward'
-    await tester.tap(find.byIcon(Icons.arrow_forward));
-    await tester.pump();
+      // Expected : 'forward' button is still grey
+      expect(getFAB(tester, Icons.arrow_forward).backgroundColor, equals(Colors.grey));
 
-    // Expected : the displayed image changed, and is still the first of the hints list
-    expect(getDisplayedImage(tester).image, equals(Image.asset(hints[0].imagePath).image));
-  });
+      // Trigger 'forward'
+      await tester.tap(find.byIcon(Icons.arrow_forward));
+      await tester.pump();
 
-  // ----------------------------------------------------------------------------------------- //
-  // --------------------------------- QR Game : Renew timer --------------------------------- //
-  // ----------------------------------------------------------------------------------------- //
+      // Expected : the displayed image changed, and is still the first of the hints list
+      expect(getDisplayedImage(tester).image, equals(Image.asset(hints[0].imagePath).image));
 
-  testWidgets('QR Game : Renew timer', (WidgetTester tester) async {
-    await tester.pumpWidget(testableOf(SearchGame()));
+      printSuccess(testGroupName, 'No scan');
+    });
 
-    // 1. Expected : There is a displayed image
-    // 2. Expected : It's the first of the hints list
-    // 3. Expected : The 'renew' button is grey
-    expect(find.byType(Image), findsOneWidget);
-    expect(getDisplayedImage(tester).image, equals(Image.asset(hints[0].imagePath).image));
-    expect(getFAB(tester, Icons.autorenew).backgroundColor, equals(Colors.grey));
+    // ----------------------------------------------------------------------------------------- //
+    // --------------------------------- QR Game : Renew timer --------------------------------- //
+    // ----------------------------------------------------------------------------------------- //
 
-    // We wait until the button becomes available
-    await tester.pump(Duration(seconds: 60 + 1));
+    testWidgets('Renew timer', (WidgetTester tester) async {
+      await tester.pumpWidget(testableOf(SearchGame()));
 
-    // Expected : 'renew' button is still grey
-    expect(getFAB(tester, Icons.autorenew).backgroundColor, equals(Colors.amber[900]));
+      // 1. Expected : There is a displayed image
+      // 2. Expected : It's the first of the hints list
+      // 3. Expected : The 'renew' button is grey
+      expect(find.byType(Image), findsOneWidget);
+      expect(getDisplayedImage(tester).image, equals(Image.asset(hints[0].imagePath).image));
+      expect(getFAB(tester, Icons.autorenew).backgroundColor, equals(Colors.grey));
 
-    // Trigger 'forward'
-    await tester.tap(find.byIcon(Icons.autorenew));
-    await tester.pump();
+      // We wait until the button becomes available
+      await tester.pump(Duration(seconds: 60 + 1));
 
-    // Expected : the displayed image changed, and is still the first of the hints list
-    expect(getDisplayedImage(tester).image, equals(Image.asset(hints[1].imagePath).image));
+      // Expected : 'renew' button is still grey
+      expect(getFAB(tester, Icons.autorenew).backgroundColor, equals(Colors.amber[900]));
 
-    // The 'renew' button is back to grey
-    expect(getFAB(tester, Icons.autorenew).backgroundColor, equals(Colors.grey));
+      // Trigger 'forward'
+      await tester.tap(find.byIcon(Icons.autorenew));
+      await tester.pump();
+
+      // Expected : the displayed image changed, and is still the first of the hints list
+      expect(getDisplayedImage(tester).image, equals(Image.asset(hints[1].imagePath).image));
+
+      // The 'renew' button is back to grey
+      expect(getFAB(tester, Icons.autorenew).backgroundColor, equals(Colors.grey));
+
+      printSuccess(testGroupName, 'Renew timer');
+    });
   });
 }

@@ -1,3 +1,4 @@
+import 'package:explore_ton_musee/main.dart';
 import 'package:explore_ton_musee/model/nfc_hint.dart';
 import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
 import 'package:flutter/services.dart';
@@ -24,11 +25,11 @@ class NFCGameService {
     NfcData response;
 
     try {
-      print('NFC : ready');
+      log('NFC : ready');
       response = await FlutterNfcReader.read;
-      print('NFC : Tag found');
+      log('NFC : Tag found');
     } on PlatformException {
-      print('NFC: Scan stopped exception');
+      log('NFC: Scan stopped exception');
     }
 
     return response;
@@ -37,9 +38,9 @@ class NFCGameService {
   Future stopNFC() async {
     try {
       await FlutterNfcReader.stop;
-      print('NFC : Stopped reading');
+      log('NFC : Stopped reading');
     } on PlatformException {
-      print('NFC: Stop scan exception');
+      log('NFC: Stop scan exception');
     }
   }
 }

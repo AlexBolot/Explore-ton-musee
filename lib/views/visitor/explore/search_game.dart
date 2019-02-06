@@ -81,7 +81,7 @@ class _SearchGameState extends State<SearchGame> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       GestureDetector(
-                        onTap: canRefresh ? renewHint : () => print('hey not so fast !'),
+                        onTap: canRefresh ? renewHint : () {},
                         child: Stack(
                           alignment: Alignment(0, 0),
                           children: <Widget>[
@@ -91,7 +91,7 @@ class _SearchGameState extends State<SearchGame> {
                               backgroundColor: canRefresh ? Colors.amber[900] : Colors.grey,
                               heroTag: 'renew',
                               tooltip: 'renew',
-                              onPressed: canRefresh ? renewHint : () => print('hey not so fast !'),
+                              onPressed: canRefresh ? renewHint : () {},
                               child: Icon(Icons.autorenew),
                             ),
                             Container(
@@ -118,7 +118,7 @@ class _SearchGameState extends State<SearchGame> {
                         heroTag: 'forward',
                         tooltip: 'forward',
                         child: Icon(Icons.arrow_forward),
-                        onPressed: success ? renewHint : () => print('hey not so fast !'),
+                        onPressed: success ? renewHint : () {},
                       ),
                     ],
                   ),

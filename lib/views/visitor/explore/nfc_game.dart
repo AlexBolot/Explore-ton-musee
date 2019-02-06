@@ -7,6 +7,8 @@ import 'package:explore_ton_musee/views/visitor/explore/nfc_finished.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
 
+final bool _verbose = false;
+
 class NFCGame extends StatefulWidget {
   static const String routeName = "/NFCGame";
 
@@ -62,14 +64,14 @@ class _NFCGameState extends State<NFCGame> {
   void renewHint() {
     if (gameService.hasNext) {
       nfcHint = gameService.next;
-    } else{
-      print('NFC Game is finished !');
+    } else {
+      log('NFC Game is finished !');
       Navigator.of(context).pushNamedAndRemoveUntil(NFCFinished.routeName, ModalRoute.withName(Explore.routeName));
     }
   }
 
   void tagFound(NfcData data) async {
-    print('-tag found-');
+    log('NFC : tag found');
 
     if (data?.content == null) return;
 
@@ -77,20 +79,20 @@ class _NFCGameState extends State<NFCGame> {
       String foundCode = data.content.split("##")[1];
 
       if (foundCode == nfcHint.code) {
-        print('-code matches-');
+        log('NFC : code matches');
         setState(() {
           addHintItem(nfcHint.hintText);
           renewHint();
         });
       } else {
-        print('expected : ${nfcHint.code}');
-        print('found : $foundCode');
+        log('expected : ${nfcHint.code}');
+        log('found : $foundCode');
       }
 
       await gameService.stopNFC();
       await gameService.startNFC().then(tagFound);
 
-      print('-ready to read-');
+      log('NFC : ready to read');
     }
   }
 

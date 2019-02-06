@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
         child: MenuItem.listView([
           //----------------//
           MenuItem.horizontal(
+            key: Key(AboutUs.routeName),
             height: 120,
             color: MenuItem.green,
             icon: Icons.account_balance,
@@ -38,6 +39,7 @@ class _HomePageState extends State<HomePage> {
           //----------------//
           MenuItem.row([
             MenuItem.vertical(
+              key: Key(Explore.routeName),
               width: percentSize(40, availableWidth),
               color: MenuItem.blue,
               icon: Icons.explore,

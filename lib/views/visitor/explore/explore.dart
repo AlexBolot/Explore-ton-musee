@@ -29,6 +29,7 @@ class _ExploreState extends State<Explore> {
         child: MenuItem.listView([
           MenuItem.row([
             MenuItem.vertical(
+              key: Key(NFCStarter.routeName),
               height: 180,
               width: percentSize(50, availableWidth),
               icon: Icons.nfc,
@@ -38,6 +39,7 @@ class _ExploreState extends State<Explore> {
               onPressed: () => Navigator.of(context).pushNamed(NFCStarter.routeName),
             ),
             MenuItem.vertical(
+              key: Key(SearchGame.routeName),
               height: 180,
               width: percentSize(50, availableWidth),
               icon: Icons.search,

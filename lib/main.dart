@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (context) => HomePage(),
         AboutUs.routeName: (context) => AboutUs(),
         Explore.routeName: (context) => Explore(),
-        NFCStarter.routeName:(context)=> NFCStarter(),
+        NFCStarter.routeName: (context) => NFCStarter(),
         NFCGame.routeName: (context) => NFCGame(),
-        NFCFinished.routeName : (context) => NFCFinished(),
+        NFCFinished.routeName: (context) => NFCFinished(),
         SearchGame.routeName: (context) => SearchGame(),
         SearchFinished.routeName: (context) => SearchFinished(),
       },
@@ -57,4 +57,10 @@ void showSnackBar({@required ScaffoldState scaffoldState, String message, Durati
       content: Text(message),
     ),
   );
+}
+
+log(String message) {
+  bool _verbose = true;
+
+  if (_verbose) print(message);
 }

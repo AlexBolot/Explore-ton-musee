@@ -1,3 +1,4 @@
+import 'package:explore_ton_musee/main.dart';
 import 'package:flutter/material.dart';
 
 class MenuItem extends StatefulWidget {
@@ -54,6 +55,7 @@ class MenuItem extends StatefulWidget {
   final bool _isVertical;
 
   MenuItem.vertical({
+    Key key,
     this.elevation,
     this.color,
     this.icon,
@@ -68,9 +70,11 @@ class MenuItem extends StatefulWidget {
   })  : iconSize = 48,
         titleSize = 18,
         contentSize = 14,
-        _isVertical = true;
+        _isVertical = true,
+        super(key: key);
 
   MenuItem.horizontal({
+    Key key,
     this.elevation,
     this.color,
     this.icon,
@@ -85,7 +89,8 @@ class MenuItem extends StatefulWidget {
   })  : iconSize = 64,
         titleSize = 22,
         contentSize = 16,
-        _isVertical = false;
+        _isVertical = false,
+        super(key: key);
 
   @override
   _MenuItemState createState() => _MenuItemState();
@@ -170,7 +175,7 @@ class _MenuItemState extends State<MenuItem> {
       borderRadius: BorderRadius.all(Radius.circular(16)),
       highlightColor: Theme.of(context).primaryColor.withOpacity(0.1),
       splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
-      onTap: widget.onPressed ?? () => print('Callback not given'),
+      onTap: widget.onPressed ?? () => log('Callback not given'),
       child: child,
     );
   }

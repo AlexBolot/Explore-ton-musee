@@ -88,9 +88,7 @@ class _NFCStarterState extends State<NFCStarter> {
                 "C'est parti !",
                 style: TextStyle(fontSize: 16),
               ),
-              onPressed: () {
-                Navigator.of(context).pushNamed(NFCGame.routeName);
-              },
+              onPressed: () => Navigator.of(context).pushNamed(NFCGame.routeName),
             ),
           )
         ]),
