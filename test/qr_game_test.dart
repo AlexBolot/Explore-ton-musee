@@ -1,5 +1,4 @@
 import 'package:explore_ton_musee/model/search_hint.dart';
-import 'package:explore_ton_musee/services/qr_game_service.dart';
 import 'package:explore_ton_musee/services/service_provider.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search_game.dart';
 import 'package:flutter/material.dart';

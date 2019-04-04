@@ -1,5 +1,6 @@
 import 'package:explore_ton_musee/main.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc_starter.dart';
+import 'package:explore_ton_musee/views/visitor/explore/path_starter.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search_game.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,11 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
-    AppBar appBar = AppBar(title: Text(widget.title));
-
     var horizontalSeparator = Container(height: 8.0);
     var availableWidth = MediaQuery.of(context).size.width - (2 * 16) - 8;
 
     return Scaffold(
-      appBar: appBar,
+      appBar: AppBar(title: Text(widget.title)),
       body: Container(
         child: MenuItem.listView([
           MenuItem.row([
@@ -52,12 +51,14 @@ class _ExploreState extends State<Explore> {
           horizontalSeparator,
           MenuItem.row([
             MenuItem.vertical(
+              key: Key(PathStarter.routeName),
               height: 180,
               width: percentSize(50, availableWidth),
               icon: Icons.timeline,
               color: MenuItem.orange,
               title: 'Parcours de visite',
               content: 'Choisir un parcours recommandé',
+              onPressed: () => Navigator.of(context).pushNamed(PathStarter.routeName),
             ),
             horizontalSeparator,
             MenuItem.vertical(

@@ -1,14 +1,17 @@
+import 'package:explore_ton_musee/model/nfc_hint.dart';
+import 'package:explore_ton_musee/services/nfc_game_service.dart';
+import 'package:explore_ton_musee/services/service_provider.dart';
 import 'package:explore_ton_musee/views/visitor/about_us.dart';
 import 'package:explore_ton_musee/views/visitor/explore/explore.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc_finished.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc_game.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc_starter.dart';
+import 'package:explore_ton_musee/views/visitor/explore/path_starter.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search_finished.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search_game.dart';
 import 'package:explore_ton_musee/views/visitor/home_page.dart';
 import 'package:explore_ton_musee/views/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
 import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
@@ -31,6 +34,7 @@ class MyApp extends StatelessWidget {
         NFCFinished.routeName: (context) => NFCFinished(),
         SearchGame.routeName: (context) => SearchGame(),
         SearchFinished.routeName: (context) => SearchFinished(),
+        PathStarter.routeName: (context) => PathStarter(),
       },
     );
   }
@@ -60,7 +64,7 @@ void showSnackBar({@required ScaffoldState scaffoldState, String message, Durati
 }
 
 log(String message) {
-  bool _verbose = true;
+  bool _verbose = false;
 
   if (_verbose) print(message);
 }

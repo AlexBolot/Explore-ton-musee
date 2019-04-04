@@ -14,10 +14,15 @@ class NFCFinished extends StatefulWidget {
 class _NFCFinishedState extends State<NFCFinished> {
   @override
   Widget build(BuildContext context) {
-    //String formattedText = ;
-
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(widget.title),
+        leading: IconButton(
+          tooltip: 'Back', // Used for testing purpose
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: Container(
         child: Center(
           child: Card(

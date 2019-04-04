@@ -25,6 +25,8 @@ class MenuItem extends StatefulWidget {
 
   static Color get green => Colors.green;
 
+  static Color get red => Colors.red[400];
+
   static Color get orange => Colors.orange;
 
   static Color get yellow => Colors.yellow[600];
@@ -165,7 +167,7 @@ class _MenuItemState extends State<MenuItem> {
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
-      elevation: widget.elevation ?? 16,
+      elevation: widget.elevation ?? (hasInteraction ? 16 : 16),
       child: hasInteraction ? _wrapInInkWell(child) : child,
     );
   }
