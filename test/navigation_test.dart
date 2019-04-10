@@ -1,9 +1,9 @@
 import 'package:explore_ton_musee/views/splash_screen.dart';
 import 'package:explore_ton_musee/views/visitor/about_us.dart';
 import 'package:explore_ton_musee/views/visitor/explore/explore.dart';
-import 'package:explore_ton_musee/views/visitor/explore/nfc_game.dart';
-import 'package:explore_ton_musee/views/visitor/explore/nfc_starter.dart';
-import 'package:explore_ton_musee/views/visitor/explore/search_game.dart';
+import 'package:explore_ton_musee/views/visitor/explore/nfc/nfc_game.dart';
+import 'package:explore_ton_musee/views/visitor/explore/nfc/nfc_starter.dart';
+import 'package:explore_ton_musee/views/visitor/explore/search/search_game.dart';
 import 'package:explore_ton_musee/views/visitor/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

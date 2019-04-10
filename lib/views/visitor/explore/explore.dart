@@ -1,7 +1,7 @@
 import 'package:explore_ton_musee/main.dart';
-import 'package:explore_ton_musee/views/visitor/explore/nfc_starter.dart';
-import 'package:explore_ton_musee/views/visitor/explore/path_starter.dart';
-import 'package:explore_ton_musee/views/visitor/explore/search_game.dart';
+import 'package:explore_ton_musee/views/visitor/explore/nfc/nfc_starter.dart';
+import 'package:explore_ton_musee/views/visitor/explore/path/path_starter.dart';
+import 'package:explore_ton_musee/views/visitor/explore/search/search_game.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 

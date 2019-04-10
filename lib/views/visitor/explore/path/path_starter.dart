@@ -1,5 +1,5 @@
 import 'package:explore_ton_musee/services/path_service.dart';
-import 'package:explore_ton_musee/views/visitor/explore/path_activity.dart';
+import 'package:explore_ton_musee/views/visitor/explore/path/path_activity.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 

@@ -2,7 +2,7 @@ import 'package:explore_ton_musee/main.dart';
 import 'package:explore_ton_musee/model/search_hint.dart';
 import 'package:explore_ton_musee/services/qr_game_service.dart';
 import 'package:explore_ton_musee/services/service_provider.dart';
-import 'package:explore_ton_musee/views/visitor/explore/search_finished.dart';
+import 'package:explore_ton_musee/views/visitor/explore/search/search_finished.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 

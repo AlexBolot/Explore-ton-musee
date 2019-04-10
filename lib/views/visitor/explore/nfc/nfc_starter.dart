@@ -1,5 +1,5 @@
 import 'package:explore_ton_musee/main.dart';
-import 'package:explore_ton_musee/views/visitor/explore/nfc_game.dart';
+import 'package:explore_ton_musee/views/visitor/explore/nfc/nfc_game.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
