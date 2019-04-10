@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  carousel_slider: ^1.3.0
   mockito: ^4.0.0
   barcode_scan:
   flutter_nfc_reader:
@@ -44,13 +45,26 @@ flutter:
   uses-material-design: true
 
   assets:
-   - assets/blob.gif
+   - assets/nfc_animation.gif
+   - assets/museum_map.png
+   - assets/museum_map_fast.png
+   - assets/museum_map_slow.png
+   - assets/museum_map_children.png
+   - assets/museum_map_english.png
    - assets/hint1.jpg
    - assets/hint2.jpg
    - assets/hint3.jpg
    - assets/painting1.jpg
    - assets/painting2.jpg
    - assets/painting3.jpg
+   - assets/badge_1.png
+   - assets/badge_2.png
+   - assets/badge_3.png
+   - assets/badge_4.png
+   - assets/badge_5.png
+   - assets/badge_6.png
+   - assets/badge_7.png
+   - assets/badge_8.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

@@ -6,6 +6,7 @@ import 'package:explore_ton_musee/views/visitor/explore/explore.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc_finished.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc_game.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc_starter.dart';
+import 'package:explore_ton_musee/views/visitor/explore/path_activity.dart';
 import 'package:explore_ton_musee/views/visitor/explore/path_starter.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search_finished.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search_game.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         SearchGame.routeName: (context) => SearchGame(),
         SearchFinished.routeName: (context) => SearchFinished(),
         PathStarter.routeName: (context) => PathStarter(),
+        PathActivity.routeName : (context)=> PathActivity(),
       },
     );
   }

@@ -1,3 +1,5 @@
+import 'package:explore_ton_musee/services/path_service.dart';
+import 'package:explore_ton_musee/views/visitor/explore/path_activity.dart';
 import 'package:explore_ton_musee/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,11 @@ class _PathStarterState extends State<PathStarter> {
   Widget build(BuildContext context) {
     double size = 110;
 
+    Widget fast = PathActivity(title: 'Visite Rapide', pathName: PathName.Fast);
+    Widget slow = PathActivity(title: 'Visite Tranquille', pathName: PathName.Slow);
+    Widget children = PathActivity(title: 'Visite Ludique', pathName: PathName.Children);
+    Widget english = PathActivity(title: 'English Tour', pathName: PathName.English);
+
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: Container(
@@ -28,7 +35,7 @@ class _PathStarterState extends State<PathStarter> {
             content: 'Parcours simple et rapide pour ceux qui ont peu de temps !',
             contentAlign: TextAlign.left,
             color: MenuItem.turquoise,
-            onPressed: (){},
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => fast)),
           ),
           MenuItem.horizontal(
             height: size,
@@ -37,6 +44,7 @@ class _PathStarterState extends State<PathStarter> {
             content: "Parcours détaillé pour ceux qui prennent le temps de tout voir !",
             contentAlign: TextAlign.left,
             color: MenuItem.blue,
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => slow)),
           ),
           MenuItem.horizontal(
             height: size,
@@ -45,14 +53,16 @@ class _PathStarterState extends State<PathStarter> {
             content: "Parcours plus ludique possible",
             contentAlign: TextAlign.left,
             color: MenuItem.orange,
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => children)),
           ),
           MenuItem.horizontal(
             height: size,
             icon: Icons.language,
             title: 'Translated',
-            content: "If you don't speak french",
+            content: "If you speak english",
             contentAlign: TextAlign.left,
             color: MenuItem.blue,
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => english)),
           ),
         ]),
       ),
