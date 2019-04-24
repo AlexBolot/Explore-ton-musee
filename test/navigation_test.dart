@@ -1,8 +1,11 @@
+import 'package:explore_ton_musee/services/path_service.dart';
 import 'package:explore_ton_musee/views/splash_screen.dart';
 import 'package:explore_ton_musee/views/visitor/about_us.dart';
 import 'package:explore_ton_musee/views/visitor/explore/explore.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc/nfc_game.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc/nfc_starter.dart';
+import 'package:explore_ton_musee/views/visitor/explore/path/path_activity.dart';
+import 'package:explore_ton_musee/views/visitor/explore/path/path_starter.dart';
 import 'package:explore_ton_musee/views/visitor/explore/search/search_game.dart';
 import 'package:explore_ton_musee/views/visitor/home_page.dart';
 import 'package:flutter/material.dart';
@@ -148,6 +151,33 @@ main() {
       expect(find.byType(SearchGame), findsOneWidget);
 
       printSuccess(testGroupName, 'Explore -> QRCode Game');
+    });
+
+    // ------------------------------ Explore -> PathStarter ------------------------------- //
+
+    testWidgets('Explore -> PathStarter', (WidgetTester tester) async {
+      await tester.pumpWidget(testableOf(
+        Explore(),
+        navigatorObservers: [mockObserver],
+        otherRoutes: {
+          PathStarter.routeName: (context) => PathStarter(),
+        },
+      ));
+
+      await tester.tap(find.descendant(
+        of: find.byKey(Key(PathStarter.routeName)),
+        matching: find.byType(InkWell),
+      ));
+
+      await tester.pumpAndSettle();
+
+      // Expected : navigation from a page to another happened
+      verify(mockObserver.didPush(any, any));
+
+      // Expected : current screen contains SearchGame widget
+      expect(find.byType(PathStarter), findsOneWidget);
+
+      printSuccess(testGroupName, 'Explore -> PathStarter');
     });
 
     // ------------------------------ NFC Starter -> NFC Game ------------------------------- //

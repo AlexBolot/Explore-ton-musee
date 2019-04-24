@@ -29,6 +29,7 @@ class _PathStarterState extends State<PathStarter> {
       body: Container(
         child: MenuItem.listView([
           MenuItem.horizontal(
+            key: Key(PathName.Fast.toString()),
             height: size,
             icon: Icons.timer_off,
             title: 'Pour les pressés',
@@ -38,6 +39,7 @@ class _PathStarterState extends State<PathStarter> {
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => fast)),
           ),
           MenuItem.horizontal(
+            key: Key(PathName.Slow.toString()),
             height: size,
             icon: Icons.access_time,
             title: 'Pour les tranquilles',
@@ -47,6 +49,7 @@ class _PathStarterState extends State<PathStarter> {
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => slow)),
           ),
           MenuItem.horizontal(
+            key: Key(PathName.Children.toString()),
             height: size,
             icon: Icons.supervisor_account,
             title: 'Avec des enfants',
@@ -56,6 +59,7 @@ class _PathStarterState extends State<PathStarter> {
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => children)),
           ),
           MenuItem.horizontal(
+            key: Key(PathName.English.toString()),
             height: size,
             icon: Icons.language,
             title: 'Translated',

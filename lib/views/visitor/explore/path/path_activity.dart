@@ -1,7 +1,6 @@
 import 'package:explore_ton_musee/services/path_service.dart';
 import 'package:explore_ton_musee/services/service_provider.dart';
 import 'package:explore_ton_musee/widgets/carousel_item.dart';
-import 'package:explore_ton_musee/widgets/colored_badge.dart';
 import 'package:explore_ton_musee/widgets/zoomable_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
