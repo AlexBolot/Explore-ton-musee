@@ -1,6 +1,3 @@
-import 'package:explore_ton_musee/model/nfc_hint.dart';
-import 'package:explore_ton_musee/services/nfc_game_service.dart';
-import 'package:explore_ton_musee/services/service_provider.dart';
 import 'package:explore_ton_musee/views/visitor/about_us.dart';
 import 'package:explore_ton_musee/views/visitor/explore/explore.dart';
 import 'package:explore_ton_musee/views/visitor/explore/nfc/nfc_finished.dart';

@@ -44,7 +44,7 @@ class _NFCGameState extends State<NFCGame> {
               height: 90,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Image.asset('assets/blob.gif'),
+                child: Image.asset('assets/nfc_animation.gif'),
               ),
             ),
           ]..addAll(displayedHints),
